@@ -16,7 +16,7 @@ namespace InsertSQLPadreHijo
         private const string _path = "List_padres.txt";
         private const string _pathTemp = "Temp.sql";
         private const string _estructuraInsert = "INSERT INTO SEG_PERMISOS (CODIGO,NOMBRE,PADRE_ID, DESCRIPCION, ESTADO) VALUES (";
-        private const string _estructuraUpdate = " UPDATE SEG_PERMISOS SET ";
+        private const string _estructuraUpdate = "UPDATE SEG_PERMISOS SET ";
 
         public Form1()
         {
@@ -164,11 +164,11 @@ namespace InsertSQLPadreHijo
         /* Generar SQL */
         private void button1_Click(object sender, EventArgs e)
         {
-            string query = string.Format("\r\n..................\r\n");
+            string query = string.Format("\r\n");
             string query_padre = "NULL";
             string query_hijo = "(SELECT T.ID FROM SEG_PERMISOS T WHERE T.CODIGO='" + codigo.Text + "')";
 
-            if (checkBox1.Checked) query_padre = string.Format("{0} {1} {2}", "(SELECT T.ID FROM SEG_PERMISOS T WHERE T.CODIGO='", listBox1.SelectedItem, "')");
+            if (checkBox1.Checked) query_padre = string.Format("{0}{1}{2}", "(SELECT T.ID FROM SEG_PERMISOS T WHERE T.CODIGO='", listBox1.SelectedItem, "')");
             
             // Update
             if (checkBox4.Checked) query += _estructuraUpdate + "ESTADO = 'Activo', PADRE_ID = " + query_padre + ", DESCRIPCION = '" + descripcion.Text + "' WHERE ID ="+query_hijo+";";
